@@ -1,0 +1,21 @@
+services:
+  sonarr4k:
+    container_name: sonarr4k
+    image: lscr.io/linuxserver/sonarr:latest
+    ports:
+      - 8986:8986
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - UMASK=002
+      - TZ=America/Phoenix
+    volumes:
+      - ./config:/config
+      - /mnt/data/:/data
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    restart: unless-stopped
+    networks:
+      - media
+networks: 
+  media:
+    external: true
